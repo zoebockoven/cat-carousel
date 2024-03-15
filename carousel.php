@@ -1,3 +1,16 @@
+<?php
+include 'config/config.php';
+include 'src/functions.php';
+
+$catId = $_GET["cat"];
+$url = "https://api.thecatapi.com/v1/images/search?limit=10&breed_ids=". $catId . "&api_key=" . APIKEY;
+
+$header = setName($catId);
+
+getImages($catId);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -20,17 +33,44 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
+
                 </div>
             </div>
         </nav>
         <!-- Page content-->
         <div class="container mt-5">
-
-        
-
-
-
-
+            <div class="col-6">
+                <h1><?php
+                echo $header;
+                ?></h1>
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <?php
+                        setIndicators();
+                        ?>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <?php
+                            echo "<img src='" . $_SESSION["img"][0]->url . "' class='d-block w-100'>";
+                            ?>
+                        </div>
+                        <?php
+                        setImages();
+                        ?>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            <p><a href="index.php">See a different cat</a></p>
         </div>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

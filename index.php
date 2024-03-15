@@ -1,3 +1,11 @@
+<?php
+include 'src/functions.php';
+include 'config/config.php';
+
+getCats();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -25,13 +33,27 @@
         </nav>
         <!-- Page content-->
         <div class="container mt-5">
-
-        
-
-
-
-
+            <h3>Cat Carousel</h3>
+            <p>Select a Cat:</p>
+            <form method="GET" action="carousel.php">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <select name="cat" class="form-select" aria-label="Select a cat breed">
+                            <option selected>Select a Cat</option>
+                            <?php
+                                populateOptions();
+                                associateArray();  
+                            ?>    
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <input class="btn btn-primary" type="submit" value="Submit">
+                    </div>
+                </div>
+            </form>
         </div>
+
+
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
